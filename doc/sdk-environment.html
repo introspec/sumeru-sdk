@@ -66,11 +66,22 @@
 
     <p>This SDK uses a custom GCC spec file (<i>conf/sumeru.spec</i>)
     to automatically orchestrate compilation.  This removes the need
-    for the user to specify SDK specific command line arguments.</p>
+    for the user to specify SDK specific command line arguments and
+    programs can be compiled simply by running ...</p>
+
+    <p><i>gcc -o helloworld helloworld.c</i></p>
+
+    <p>For more details on compiling and running programs refer to:</p>
+
+    <table>
+	<tr><td><a href="../QUICKSTART.html">QUICKSTART.html</a></td></tr>
+	<tr><td><a href="index.html">doc/index.html</a></td></tr>
+    </table>
 
     <p>One can use the GCC <i>-nostdinc</i> <i>-nostdlib</i> arguments
     to build bare-metal programs for the SUMERU SBC. For more details
     refer to <i>src/example/baremetal</i>.
+
 </body>
 
 </html>
