@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>Sumeru SDK - Environment</title>
+    <link rel="icon" type="image/png" href="images/purpe-favicon.png">
+
+    <!-- Stylesheets -->
+    <link rel="alternate" href="https://">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+
+    <!-- Overpass font -->
+    <!-- <link rel="stylesheet" href="sytle/css.css"> -->
+
+    <link rel="canonical" href="https://">
+    <h1>Sumeru SDK - Environment</h1>
+</head>
+<body>
+
+    <p>It is recommended that the environment required by this SDK be set 
+    by sourcing the <b>env.sh</b> script located in the toplevel 
+    directory. This is equivalent to performing the 3 steps detailed below.</p>
+
+    <h3>1. Environment Variables</h3>
+    <table border=2 style="padding:15px;">
+	<tr>
+	    <th>Name</th><th>Description</th>
+	</tr>
+	<tr>
+	    <td>SUMERU_DIR</td><td>SDK directory path</td>
+	</tr>
+	<tr>
+	    <td>SUMERU_UART_DEVICE</td>
+	    <td>Sumeru USB serial port device path.<br/>Usually "/dev/ttyUSB0"</td> 
+	</tr>
+    </table>
+
+    <h3>2. PATH</h3>
+    <table>
+	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/bin</td></tr>
+	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/riscv-gnu-toolchain/bin</td></tr>
+    </table>
+
+    <h3>3. Custom Linker Script Adjustment</h3>
+
+    <p>This SDK uses a custom link script for linking produced binaries.
+
+    <p>The custom link script, named <i>static-binary-link.lds</i> is 
+	located in the <i>conf</i> directory and it needs to be edited
+	to set the path where this SDK is installed. Specifically, the 
+	SETME place-holders in the SEARCH_DIR section, lines 10-12, of 
+	this script need to be changed to the toplevel directory of 
+	this SDK.</p>
+
+    <p>This change is automatically done when the user sources
+    the env.sh for the first time.</p> 
+
+    <p>You will need to perform this change manually if you change 
+    the installation location of your SDK or else linking will 
+    fail with a "cannot find -l... " errors.</p>
+
+
+    <H2>Beneath the hood</H2>
+
+    <p>This SDK uses a custom GCC spec file (<i>conf/sumeru.spec</i>)
+    to automatically orchestrate compilation.  This removes the need
+    for the user to specify SDK specific command line arguments.</p>
+
+    <p>One can use the GCC <i>-nostdinc</i> <i>-nostdlib</i> arguments
+    to build bare-metal programs for the SUMERU SBC. For more details
+    refer to <i>src/example/baremetal</i>.
+</body>
+
+</html>
