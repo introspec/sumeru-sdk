@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<title>Sumeru SDK - Makefiles</title>
+	<link rel="icon" type="image/png" href="images/purpe-favicon.png">
+
+	<!-- Stylesheets -->
+	<link rel="alternate" href="https://">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+
+	<!-- Overpass font -->
+	<!-- <link rel="stylesheet" href="sytle/css.css"> -->
+
+	<link rel="canonical" href="https://">
+	<h1><u>Sumeru SDK - Makefiles</u></h1>
+    </head>
+
+    <body style="max-width:800px;font-size: 20px;">
+
+	<p> This SDK uses a simple template mechanism for it's makefiles.
+	This same system can be used by the user to create makefiles for
+	their own projects. 
+
+	<p> To use these templates add the following line to the top of
+	your Makefile </p>
+
+	<b> include ${SUMERU_DIR}/conf/sumeru-pre.mk </b>
+
+	<p> Depending of the functionality you require, add one of the following lines to the bottom of your Makefile. </p>
+
+	<p><b> include ${SUMERU_DIR}/conf/sumeru-app-post.mk </b></p>
+	<p><b> include ${SUMERU_DIR}/conf/sumeru-lib-post.mk </b></p>
+	<p><b> include ${SUMERU_DIR}/conf/sumeru-subdir.mk </b></p>
+
+	<hr/>
+	<H3><b>sumeru-app-post.mk</b></H3>
+
+	<p>This template file is used to build SUMERU RISC-V 
+	executables. It supports the following variables</p>
+
+	<table border=2 style="padding:15px;">
+	    <tr><td>PROG</td>
+		<td>Name of compiled program (required)</td>
+	    </tr>
+	    <tr><td>CFILES</td>
+		<td>List of C source files</td>
+	    </tr>
+	    <tr><td>CXXFILES</td>
+		<td>List of C++ source files</td>
+	    </tr>
+	    <tr><td>CXXLINK</td>
+		<td>If this variable is set C++ linking is enabled</td>
+	    </tr>
+	    <tr><td>ASMFILES</td>
+		<td>List of assembly (.S) source files</td>
+	    </tr>
+	    <tr><td>CLEANFILES</td>
+		<td>List of additional files that are cleaned</td>
+	    </tr>
+	    <tr><td>NO_STDINC</td>
+		<td>If set, standard include files will not be enabled
+		    explicitly during compilation</td>
+	    </tr>
+	    <tr><td>NO_STDLIB</td>
+		<td>If set, standard library files will not be enabled
+		    explicitly during linking</td>
+	    </tr>
+	    <tr><td>CFLAGS</td>
+		<td>Flags passed to the C compiler</td>
+	    </tr>
+	    <tr><td>CXXFLAGS</td>
+		<td>Flags passed to the C++ compiler</td>
+	    </tr>
+	    <tr><td>LDFLAGS</td>
+		<td>Flags passed to the linker</td>
+	    </tr>
+	    <tr><td>LDADD</td>
+		<td>Additional library linking flags</td>
+	    </tr>
+	</table>
+
+	<p>Supported targets</>
+	<table border=2 style="padding:15px;">
+	    <tr><td>all &amp; $PROG</td>
+		<td>Builds binary</td>
+	    </tr>
+	    <tr><td>clean</td>
+		<td>Clean files</td>
+	    </tr>
+	    <tr><td>disa</td>
+		<td>Disassemble binary</td>
+	    </tr>
+	    <tr><td>run-app</td>
+		<td>Load and run app on SBC</td>
+	    </tr>
+	    <tr><td>flash-app</td>
+		<td>Flash app to SBC</td>
+	    </tr>
+	</table>
+
+	<p>
+	<b>Example Makefile for a C program</b>
+	<div style="font-family: monospace;">
+	    <table>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-pre.mk</td></tr>
+		<tr><td>PROG = helloworld</td></tr>
+		<tr><td>CFILES = helloworld.c</td></tr>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-app-post.mk</td></tr>
+	    </table>
+	</div>
+	</p>
+
+	<p>
+	<b>Example Makefile for a C++ program</b>
+	<div style="font-family: monospace;">
+	    <table>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-pre.mk</td></tr>
+		<tr><td>PROG = helloworld-cpp</td></tr>
+		<tr><td>CXXFILES = helloworld.cpp</td></tr>
+		<tr><td>CXXLINK = 1</td></tr>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-app-post.mk</td></tr>
+	    </table>
+	</div>
+	</p>
+
+
+	<hr/>
+	<H3><b>sumeru-lib-post.mk</b></H3>
+
+	<p>This template file is used to build SUMERU RISC-V 
+	static libraries. It supports the following variables</p>
+
+	<table border=2 style="padding:15px;">
+	    <tr><td>LIB</td>
+		<td>Name of library (required)</td>
+	    </tr>
+	    <tr><td>CFILES</td>
+		<td>List of C source files</td>
+	    </tr>
+	    <tr><td>CXXFILES</td>
+		<td>List of C++ source files</td>
+	    </tr>
+	    <tr><td>CXXLINK</td>
+		<td>If this variable is set C++ linking is enabled</td>
+	    </tr>
+	    <tr><td>ASMFILES</td>
+		<td>List of assembly (.S) source files</td>
+	    </tr>
+	    <tr><td>INCLUDE_FILES</td>
+		<td>List of include files (.h)</td>
+	    </tr>
+	    <tr><td>INCLUDE_INSTALL_PREFIX</td>
+		<td>Prefix within the SDK include directory where
+		    include files are to be installed.</td>
+	    </tr>
+	    <tr><td>CFLAGS</td>
+		<td>Flags passed to the C compiler</td>
+	    </tr>
+	    <tr><td>CXXFLAGS</td>
+		<td>Flags passed to the C++ compiler</td>
+	    </tr>
+	</table>
+
+	<p>Supported targets</>
+	<table border=2 style="padding:15px;">
+	    <tr><td>all &amp; $PROG</td>
+		<td>Builds library</td>
+	    </tr>
+	    <tr><td>clean</td>
+		<td>Clean files</td>
+	    </tr>
+	    <tr><td>install</td>
+		<td>Install library files in the SDK include and lib directories</td>
+	    </tr>
+	</table>
+
+	<p>
+	<b>Example Makefile for a static library</b>
+	<div style="font-family: monospace;">
+	    <table>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-pre.mk</td></tr>
+		<tr><td>LIB = libsumeru_driver.a</td></tr>
+		<tr><td>CFLAGS += -Werror</td></tr>
+		<tr><td>CFILES = $(wildcard *.c)</td></tr>
+		<tr><td>INCLUDE_FILES = os.h thread.h device.h gpio.h i2c.h spi.h timer.h uart.h pwm.h</td></tr>
+		<tr><td>INCLUDE_FILES += spi_flash.h spi_microsd.h spi_lcd.h spi_touch.h</td></tr>
+		<tr><td>INCLUDE_FILES += thread_machine_state.h</td></tr>
+		<tr><td>INCLUDE_INSTALL_PREFIX = sumeru</td></tr>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-lib-post.mk</td></tr>
+	    </table>
+	</div>
+	</p>
+
+	<hr/>
+	<H3><b>sumeru-subdir.mk</b></H3>
+	<p>This template file is used to build projects in sub-directories</p>
+
+	<table border=2 style="padding:15px;">
+	    <tr><td>SUBDIRS</td>
+		<td>List of sub-directories (required)</td>
+	    </tr>
+	</table>
+
+	<p>Supported targets</>
+	<table border=2 style="padding:15px;">
+	    <tr><td>all</td>
+		<td>Compiles sub-directories</td>
+	    </tr>
+	    <tr><td>install</td>
+		<td>Runs 'install' in sub-directories</td>
+	    </tr>
+	    <tr><td>clean</td>
+		<td>Runs 'clean' in sub-directories</td>
+	    </tr>
+	</table>
+
+	<p>
+	<b>Example Makefile for building sub-directories</b>
+	<div style="font-family: monospace;">
+	    <table>
+		<tr><td>SUBDIRS = crt0 driver</td></tr>
+		<tr><td>SUBDIRS += fs_yaffs2 fs_sdfat</td></tr>
+		<tr><td>SUBDIRS += unistd</td></tr>
+		<tr><td>include ${SUMERU_DIR}/conf/sumeru-subdir.mk</td></tr>
+	    </table>
+	</div>
+	</p>
+
+	<hr/>
+
+    </body>
+</html>
