@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>The Sumeru Software Development Kit</title>
+    <title>Sumeru - SDK</title>
     <link rel="icon" type="image/png" href="images/purpe-favicon.png">
 
     <!-- Stylesheets -->
@@ -15,7 +15,7 @@
     <!-- <link rel="stylesheet" href="sytle/css.css"> -->
 
     <link rel="canonical" href="https://">
-    <h1>Sumeru SDK</h1>
+    <h2>Sumeru - Software Development Kit</h2>
 </head>
 
 <table border=2 style="padding:15px;">
@@ -29,15 +29,15 @@
 	<td>License</td><td>GNU GPL Version 3</td>
     </tr>
     <tr>
-	<td>Author</td><td>Rohit Jalan (rohit (a) purpe.com)</td>
+	<td>Author</td><td>Rohit Jalan (r0h17 (a) purpe.com)</td>
     </tr>
 </table>
 
 
-<body>
+<body style="max-width:800px;font-size: 20px;">
     <p>SUMERU is a RISC-V (rv32im) single board computer.</p> 
 
-    <p>This SDK is based on the stock RISC-V GCC toolchain and a newlib libc, both, provided by the RISC-V foundation.</p>
+    <p>This SDK is based on a specific version of the stock RISC-V GCC 9.2.0 toolchain and the associated (newlib) libc. Both of these are published by the RISC-V foundation.</p>
     <p>For more information refer to:</p>
 
     <table>
@@ -46,9 +46,9 @@
 	<tr><td><a href="https://purpe.com/sumeru">www.purpe.com/sumeru</a></td></tr>
     </table>
 
-    <p>Instructions for compiling the toolchain locally are available at <a href="doc/toolchain.html">doc/toolchain.html</a></p>
+    <p>This distribution includes a binary toolchain for Linux AMD-64 (Debian 10). Instructions for compiling the toolchain locally are in <a href="doc/toolchain.html">doc/toolchain.html</a></p>
 
-    <p>SDK documentation is at:
+    <p><b>SDK documentation</b>:
 
 	<table>
 	    <tr>
@@ -64,13 +64,31 @@
 		<td><a href="doc/sdk-environment.html">doc/sdk-environment.html</a></td>
 	    </tr>
 	</table>
+    </p>
 
-	<H3>Mailing list: sumeru-sdk (a) purpe.com</H3>
+    <p><b>Hardware Documentation</b>:
 
-	<p>The CPU (aka. firmware) versions supported by this SDK are</p>
-
-	<table border=2 style="padding:15px;">
+	<table>
 	    <tr>
+		<td><a href="doc/board/overview.html">Board Overview</a></td>
+	    </tr>
+	    <tr>
+		<td><a href="doc/cpu/index.html">CPU Reference</a></td>
+	    </tr>
+	    <tr>
+		<td><a href="doc/machine/index.html">Board Reference</a></td>
+	    </tr>
+	</table>
+    </p>
+
+    <b>Mailing list: sumeru-sdk (a) purpe.com</b>
+    <p>To subscribe, send an email to the above address with 
+    the word "subscribe" in its subject line.</p>
+
+    <p><b>CPUs supported by this version of the SDK:</b></p>
+
+    <table border=2 style="padding:15px;">
+	<tr>
 		<th>Version</th><th>Peripheral Id.</th><th>MD5</th>
 	    </tr>
 	    <tr>
@@ -78,7 +96,7 @@
 	    </tr>
 	</table>
 
-	<h3>Acknowledgements</h3>
+	<p><H3>Acknowledgements:</H3></p>
 	<p>This SDK uses code from the following projects</p>
 	<table border=2 style="padding:15px;">
 	    <tr>
