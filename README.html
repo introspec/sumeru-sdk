@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>Sumeru - SDK</title>
-    <link rel="icon" type="image/png" href="images/purpe-favicon.png">
+	<title>Sumeru - SDK</title>
+	<link rel="icon" type="image/png" href="doc/images/purpe-favicon.png">
 
-    <!-- Stylesheets -->
-    <link rel="alternate" href="https://">
-    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="alternate" href="https://">
+	<link rel="canonical" href="https://">
 
-    <!-- Overpass font -->
-    <!-- <link rel="stylesheet" href="sytle/css.css"> -->
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="doc/style.css">
 
-    <link rel="canonical" href="https://">
-    <h2>Sumeru - Software Development Kit</h2>
-</head>
+	<h2>Sumeru - Software Development Kit</h2>
+    </head>
 
-<table border=2 style="padding:15px;">
-    <tr>
-	<td>SDK Version</td><td>1.0</td>
-    </tr>
-    <tr>
-	<td>Release Date</td><td>01/12/2021</td>
-    </tr>
-    <tr>
-	<td>License</td><td>GNU GPL Version 3</td>
-    </tr>
-    <tr>
-	<td>Author</td><td>Rohit Jalan (r0h17 (a) purpe.com)</td>
-    </tr>
-</table>
+    <body>
+	<table class="table-w-border">
+	    <tr>
+		<td>SDK Version</td><td>1.0</td>
+	    </tr>
+	    <tr>
+		<td>Release Date</td><td>01/12/2021</td>
+	    </tr>
+	    <tr>
+		<td>License</td><td>GNU GPL Version 3</td>
+	    </tr>
+	    <tr>
+		<td>Author</td><td>Rohit Jalan (r0h17 (a) purpe.com)</td>
+	    </tr>
+	</table>
 
 
-<body style="max-width:800px;font-size: 20px; margin-left: 40px">
-    <p><b>SUMERU</b> is a RISC-V (rv32im) single board computer.</p> 
+	<p><b>SUMERU</b> is a RISC-V (rv32im) single board computer.</p> 
 
-    <p>This SDK is based on a specific version of the stock RISC-V GCC 9.2.0 toolchain and the associated (newlib) libc. Both of these are published by the RISC-V foundation.</p>
-    <p>For more information refer to:</p>
+	<p>This SDK is based on a specific version of the stock RISC-V GCC 9.2.0 toolchain and the associated (newlib) libc. Both of these are published by the RISC-V foundation.</p>
+	<p>For more information refer to:</p>
 
-    <table style="margin-left: 40px;">
-	<tr><td><a href="https://www.riscv.org">www.riscv.org</a></td></tr>
-	<tr><td><a href="https://github.com/riscv/riscv-gcc">github.com/riscv/riscv-gcc</a></td></tr>
-	<tr><td><a href="https://purpe.com/sumeru">www.purpe.com/sumeru</a></td></tr>
-    </table>
+	<table class="table-w-indent">
+	    <tr><td><a href="https://www.riscv.org">www.riscv.org</a></td></tr>
+	    <tr><td><a href="https://github.com/riscv/riscv-gcc">github.com/riscv/riscv-gcc</a></td></tr>
+	    <tr><td><a href="https://purpe.com/sumeru">www.purpe.com/sumeru</a></td></tr>
+	</table>
 
-    <p>This SDK includes a binary toolchain for Linux AMD-64 (Debian 10). Instructions for compiling the toolchain locally are in <a href="doc/toolchain.html">doc/toolchain.html</a></p>
+	<p>This SDK includes a binary toolchain for Linux AMD-64 (Debian 10). Instructions for compiling the toolchain locally are in <a href="doc/toolchain.html">doc/toolchain.html</a></p>
 
-    <p><b>SDK documentation</b>:
+	<p><b>SDK documentation</b>:
 
-	<table style="margin-left: 40px;">
+	<table class="table-w-indent">
 	    <tr>
 		<td><a href="QUICKSTART.html">QUICKSTART.html</a></td>
 	    </tr>
@@ -67,11 +65,11 @@
 		<td><a href="doc/sdk-make-templates.html">doc/sdk-make-templates.html</a></td>
 	    </tr>
 	</table>
-    </p>
+	</p>
 
-    <p><b>Hardware Documentation</b>:
+	<p><b>Hardware Documentation</b>:
 
-	<table style="margin-left: 40px;">
+	<table class="table-w-indent">
 	    <tr>
 		<td><a href="doc/board/overview.html">Board Overview</a></td>
 	    </tr>
@@ -82,16 +80,16 @@
 		<td><a href="doc/machine/index.html">Board Reference</a></td>
 	    </tr>
 	</table>
-    </p>
+	</p>
 
-    <b>Mailing list: sumeru-sdk (a) purpe.com</b>
-    <p>To subscribe, send an email to the above address with 
-    the word "subscribe" in its subject line.</p>
+	<b>Mailing list: sumeru-sdk (a) purpe.com</b>
+	<p>To subscribe, send an email to the above address with 
+	the word "subscribe" in its subject line.</p>
 
-    <p><b>CPUs supported by this version of the SDK:</b></p>
+	<p><b>CPUs supported by this version of the SDK:</b></p>
 
-    <table border=2 style="padding:15px;">
-	<tr>
+	<table class="table-w-border">
+	    <tr>
 		<th>Version</th><th>Peripheral Id.</th><th>MD5</th>
 	    </tr>
 	    <tr>
@@ -101,7 +99,8 @@
 
 	<p><H3>Acknowledgements:</H3></p>
 	<p>This SDK uses code from the following projects</p>
-	<table border=2 style="padding:15px;">
+
+	<table class="table-w-border">
 	    <tr>
 		<td><b><a href="http://www.bluez.org">BlueZ</a></b></td>
 		<td>Official Linux Bluetooth protocol stack</td>
@@ -122,6 +121,6 @@
 		<td>Arduino FAT16/FAT32 exFAT Library</td>
 	    </tr>
 	</table>
-</body>
+    </body>
 
 </html>
