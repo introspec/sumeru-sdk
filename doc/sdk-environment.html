@@ -1,112 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>Sumeru SDK - Environment</title>
-    <link rel="icon" type="image/png" href="images/purpe-favicon.png">
+	<title>Sumeru SDK - Environment</title>
+	<link rel="icon" type="image/png" href="images/purpe-favicon.png">
 
-    <!-- Stylesheets -->
-    <link rel="alternate" href="https://">
-    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<!-- Stylesheets -->
+	<link rel="alternate" href="https://">
+	<link rel="canonical" href="https://">
 
-    <!-- Overpass font -->
-    <!-- <link rel="stylesheet" href="sytle/css.css"> -->
+	<link rel="stylesheet" type="text/css" href="style.css">
 
-    <link rel="canonical" href="https://">
-    <h1><u>Sumeru SDK - Environment</u></h1>
-</head>
+	<h1><u>Sumeru SDK - Environment</u></h1>
+    </head>
 
-<body style="max-width:800px;font-size: 20px;margin-left: 40px;">
-    <table border=2 style="padding:15px;">
+    <body>
+	    <p>It is recommended that the environment needed by this SDK be set 
+	    by sourcing the <b>env.sh</b> script located in the toplevel 
+	    directory. For e.g.,</p>
 
-    <p>It is recommended that the environment needed by this SDK be set 
-    by sourcing the <b>env.sh</b> script located in the toplevel 
-    directory. For e.g.,</p>
+	    <p><i>$ source /some/install/path/sumeru-sdk/env.sh</i></p>
 
-    <p><i>$ source /some/install/path/sumeru-sdk/env.sh</i></p>
-    
-    This is equivalent to performing the 3 steps detailed below.</p>
+	    This is equivalent to performing the 3 steps detailed below.</p>
 
-    <p><b>1. Environment Variables</b>
-    <table border=2 style="padding:15px;">
-	<tr>
-	    <th>Name</th><th>Description</th>
-	</tr>
-	<tr>
-	    <td>SUMERU_DIR</td><td>SDK directory path</td>
-	</tr>
-	<tr>
-	    <td>SUMERU_UART_DEVICE</td>
-	    <td>Sumeru USB serial port device path.<br/>Usually "/dev/ttyUSB0"</td> 
-	</tr>
-    </table>
-    </p>
+	    <p><b>1. Environment Variables</b>
 
-    <p><b>2. PATH</b>
-    <div style="font-family: monospace; margin-left: 40px">
-    <table>
-	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/bin</td></tr>
-	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/riscv-gnu-toolchain/bin</td></tr>
-    </table>
-    </div>
-    </p>
+	    <table border=2px class="table-w-border">
+		<tr>
+		    <th>Name</th><th>Description</th>
+		</tr>
+		<tr>
+		    <td>SUMERU_DIR</td><td>SDK directory path</td>
+		</tr>
+		<tr>
+		    <td>SUMERU_UART_DEVICE</td>
+		    <td>Sumeru USB serial port device path.<br/>Usually "/dev/ttyUSB0"</td> 
+		</tr>
+	    </table>
+	    </p>
 
-    <p><b>3. Linker Script Adjustments</b>
+	    <p><b>2. PATH</b>
+	    <div class="div-code">
+		<table>
+		    <tr><td>export PATH=${PATH}:${SUMERU_DIR}/bin</td></tr>
+		    <tr><td>export PATH=${PATH}:${SUMERU_DIR}/riscv-gnu-toolchain/bin</td></tr>
+		</table>
+	    </div>
+	    </p>
 
-    <p>This SDK uses a custom link script for linking produced binaries.
+	    <p><b>3. Linker Script Adjustments</b>
 
-    <p>This custom link script, named <i>static-binary-link.lds</i> is 
-	located in the <i>conf</i> directory and it needs to be edited
-	to set the path where this SDK is installed. Specifically, the 
-	SETME place-holders in the SEARCH_DIR section, lines 10-12, of 
-	this script need to be changed to the toplevel directory of 
-	this SDK.</p>
+	    <p>This SDK uses a custom link script for linking produced binaries.
 
-    <p>This change is automatically done when the user sources
-    the env.sh for the first time.</p> 
+	    <p>This custom link script, named <i>static-binary-link.lds</i> is 
+	    located in the <i>conf</i> directory and it needs to be edited
+	    to set the path where this SDK is installed. Specifically, the 
+	    SETME place-holders in the SEARCH_DIR section, lines 10-12, of 
+	    this script need to be changed to the toplevel directory of 
+	    this SDK.</p>
 
-    <p>You will need to perform this change manually if you change 
-    the installation location of your SDK or else linking will 
-    fail with a "cannot find -l... " errors.</p>
+	    <p>This change is automatically done when the user sources
+	    the env.sh for the first time.</p> 
 
-    </p>
+	    <p>You will need to perform this change manually if you change 
+	    the installation location of your SDK or else linking will 
+	    fail with a "cannot find -l... " errors.</p>
+
+	    </p>
 
 
-    <h3><u>Beneath the hood</u></h3>
+	    <h3><u>Beneath the hood</u></h3>
 
-    <p>This SDK uses a custom GCC spec file (<i>conf/sumeru.spec</i>)
-    to automatically orchestrate compilation without the need for
-    local site specific command line arguments to the compiler and
-    programs can be compiled as follows<p>
+	    <p>This SDK uses a custom GCC spec file (<i>conf/sumeru.spec</i>)
+	    to automatically orchestrate compilation without the need for
+	    local site specific command line arguments to the compiler and
+	    programs can be compiled as follows<p>
 
-    <div style="font-family: monospace; margin-left: 40px">
-    <p><i>riscv32-unknown-elf-gcc -o helloworld helloworld.c</i></p>
-    </div>
+	    <div class="div-code">
+		<p><i>riscv32-unknown-elf-gcc -o helloworld helloworld.c</i></p>
+	    </div>
 
-    <p>This strategy also allows for simple cross compilation of autconf based
-    programs and libraries.</p>
-    <p>As an example, the FreeType library can be
-    cross compiled using the following flags:</p>
+	    <p>This strategy also allows for simple cross compilation of autconf based
+	    programs and libraries.</p>
+	    <p>As an example, the FreeType library can be
+	    cross compiled using the following flags:</p>
 
-    <div style="font-family: monospace; margin-left: 40px">
-    <p><i>./configure  --host=riscv32-unknown-elf --enable-static --disable-shared --prefix="$SUMERU_DIR/lib" --with-zlib=no --with-png=no</i></p>
-    </div>
+	    <div class="div-code">
+		<p><i>./configure  --host=riscv32-unknown-elf --enable-static --disable-shared --prefix="$SUMERU_DIR/lib" --with-zlib=no --with-png=no</i></p>
+	    </div>
 
 
-    <p>For more details on compiling and running programs 
-       refer to:</p>
+	    <p>For more details on compiling and running programs 
+	    refer to:</p>
 
-    <table>
-	<tr><td><a href="../QUICKSTART.html">QUICKSTART.html</a></td></tr>
-	<tr><td><a href="index.html">doc/index.html</a></td></tr>
-    </table>
+	    <table>
+		<tr><td><a href="../QUICKSTART.html">QUICKSTART.html</a></td></tr>
+		<tr><td><a href="index.html">doc/index.html</a></td></tr>
+	    </table>
 
-    <p>One can use the GCC <i>-nostdinc</i> <i>-nostdlib</i> arguments
-    to build bare-metal programs. For more details refer to 
-    <i>src/example/baremetal</i>.
+	    <p>One can use the GCC <i>-nostdinc</i> <i>-nostdlib</i> arguments
+	    to build bare-metal programs. For more details refer to 
+	    <i>src/example/baremetal</i>.
 
-</body>
+    </body>
 
 </html>

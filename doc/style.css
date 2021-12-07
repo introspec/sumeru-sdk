@@ -5,7 +5,7 @@ body {
 }
 
 td {
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .table-w-border {
@@ -16,3 +16,8 @@ td {
 .table-w-indent {
     margin-left: 40px;
 } 
+
+.div-code {
+    font-family: monospace;
+    margin-left: 40px;
+}
