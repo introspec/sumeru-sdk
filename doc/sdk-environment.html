@@ -18,7 +18,7 @@
     <h1><u>Sumeru SDK - Environment</u></h1>
 </head>
 
-<body style="max-width:800px;font-size: 20px;">
+<body style="max-width:800px;font-size: 20px;margin-left: 40px;">
     <table border=2 style="padding:15px;">
 
     <p>It is recommended that the environment needed by this SDK be set 
@@ -45,10 +45,12 @@
     </p>
 
     <p><b>2. PATH</b>
+    <div style="font-family: monospace; margin-left: 40px">
     <table>
 	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/bin</td></tr>
 	<tr><td>export PATH=${PATH}:${SUMERU_DIR}/riscv-gnu-toolchain/bin</td></tr>
     </table>
+    </div>
     </p>
 
     <p><b>3. Linker Script Adjustments</b>
@@ -77,12 +79,21 @@
     <p>This SDK uses a custom GCC spec file (<i>conf/sumeru.spec</i>)
     to automatically orchestrate compilation without the need for
     local site specific command line arguments to the compiler and
-    programs can be compiled simply by running ...</p>
+    programs can be compiled as follows<p>
 
+    <div style="font-family: monospace; margin-left: 40px">
     <p><i>riscv32-unknown-elf-gcc -o helloworld helloworld.c</i></p>
+    </div>
 
     <p>This strategy also allows for simple cross compilation of autconf based
     programs and libraries.</p>
+    <p>As an example, the FreeType library can be
+    cross compiled using the following flags:</p>
+
+    <div style="font-family: monospace; margin-left: 40px">
+    <p><i>./configure  --host=riscv32-unknown-elf --enable-static --disable-shared --prefix="$SUMERU_DIR/lib" --with-zlib=no --with-png=no</i></p>
+    </div>
+
 
     <p>For more details on compiling and running programs 
        refer to:</p>

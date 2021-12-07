@@ -27,13 +27,18 @@
 	<p> To use these templates add the following line to the top of
 	your Makefile </p>
 
-	<b> include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk </b>
+	<div style="font-family: monospace; margin-left: 40px">
+	    <b> include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk </b>
+	</div>
 
 	<p> Depending of the functionality you require, add one of the following lines to the bottom of your Makefile. </p>
 
-	<p><b> include ${SUMERU_DIR}/conf/mk/sumeru-app-post.mk </b></p>
-	<p><b> include ${SUMERU_DIR}/conf/mk/sumeru-lib-post.mk </b></p>
-	<p><b> include ${SUMERU_DIR}/conf/mk/sumeru-subdir.mk </b></p>
+
+	<div style="font-family: monospace; margin-left: 40px">
+	    <p><b> include ${SUMERU_DIR}/conf/mk/sumeru-app-post.mk </b></p>
+	    <p><b> include ${SUMERU_DIR}/conf/mk/sumeru-lib-post.mk </b></p>
+	    <p><b> include ${SUMERU_DIR}/conf/mk/sumeru-subdir.mk </b></p>
+	</div>
 
 	<hr/>
 	<H3><b>sumeru-app-post.mk</b></H3>
@@ -41,7 +46,7 @@
 	<p>This template file is used to build SUMERU RISC-V 
 	executables. It supports the following variables</p>
 
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>PROG</td>
 		<td>Name of compiled program (required)</td>
 	    </tr>
@@ -83,7 +88,7 @@
 	</table>
 
 	<p>Supported targets</>
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>all &amp; $PROG</td>
 		<td>Builds binary</td>
 	    </tr>
@@ -103,7 +108,7 @@
 
 	<p>
 	<b>Example Makefile for a C program</b>
-	<div style="font-family: monospace;">
+	<div style="font-family: monospace; margin-left: 40px">
 	    <table>
 		<tr><td>include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk</td></tr>
 		<tr><td>PROG = helloworld</td></tr>
@@ -115,7 +120,7 @@
 
 	<p>
 	<b>Example Makefile for a C++ program</b>
-	<div style="font-family: monospace;">
+	<div style="font-family: monospace; margin-left: 40px">
 	    <table>
 		<tr><td>include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk</td></tr>
 		<tr><td>PROG = helloworld-cpp</td></tr>
@@ -133,7 +138,7 @@
 	<p>This template file is used to build SUMERU RISC-V 
 	static libraries. It supports the following variables</p>
 
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>LIB</td>
 		<td>Name of library (required)</td>
 	    </tr>
@@ -165,7 +170,7 @@
 	</table>
 
 	<p>Supported targets</>
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>all &amp; $PROG</td>
 		<td>Builds library</td>
 	    </tr>
@@ -179,16 +184,14 @@
 
 	<p>
 	<b>Example Makefile for a static library</b>
-	<div style="font-family: monospace;">
+	<div style="font-family: monospace; margin-left: 40px">
 	    <table>
 		<tr><td>include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk</td></tr>
-		<tr><td>LIB = libsumeru_driver.a</td></tr>
+		<tr><td>LIB = libprettyfine.a</td></tr>
 		<tr><td>CFLAGS += -Werror</td></tr>
 		<tr><td>CFILES = $(wildcard *.c)</td></tr>
-		<tr><td>INCLUDE_FILES = os.h thread.h device.h gpio.h i2c.h spi.h timer.h uart.h pwm.h</td></tr>
-		<tr><td>INCLUDE_FILES += spi_flash.h spi_microsd.h spi_lcd.h spi_touch.h</td></tr>
-		<tr><td>INCLUDE_FILES += thread_machine_state.h</td></tr>
-		<tr><td>INCLUDE_INSTALL_PREFIX = sumeru</td></tr>
+		<tr><td>INCLUDE_FILES = prettyfine.h
+		<tr><td>INCLUDE_INSTALL_PREFIX = prettyfine</td></tr>
 		<tr><td>include ${SUMERU_DIR}/conf/mk/sumeru-lib-post.mk</td></tr>
 	    </table>
 	</div>
@@ -198,14 +201,14 @@
 	<H3><b>sumeru-subdir.mk</b></H3>
 	<p>This template file is used to build projects in sub-directories</p>
 
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>SUBDIRS</td>
 		<td>List of sub-directories (required)</td>
 	    </tr>
 	</table>
 
 	<p>Supported targets</>
-	<table border=2 style="padding:15px;">
+	<table border=2 style="padding:15px; margin-left:40px;">
 	    <tr><td>all</td>
 		<td>Compiles sub-directories</td>
 	    </tr>
@@ -219,11 +222,9 @@
 
 	<p>
 	<b>Example Makefile for building sub-directories</b>
-	<div style="font-family: monospace;">
+	<div style="font-family: monospace; margin-left: 40px">
 	    <table>
-		<tr><td>SUBDIRS = crt0 driver</td></tr>
-		<tr><td>SUBDIRS += fs_yaffs2 fs_sdfat</td></tr>
-		<tr><td>SUBDIRS += unistd</td></tr>
+		<tr><td>SUBDIRS = toy cat plant</td></tr>
 		<tr><td>include ${SUMERU_DIR}/conf/mk/sumeru-subdir.mk</td></tr>
 	    </table>
 	</div>
