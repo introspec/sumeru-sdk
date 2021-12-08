@@ -32,7 +32,7 @@ extern "C" {
 #define ICTX_STACK_BOTTOM		0xE000
 #define ICTX_STACK_TOP			0xEFF0
 
-#define THREAD0_ADDR			0xF000				
+#define THREAD0_TP_ADDR			0xF000				
 
 /*  
  * TIMER PERIOD			: (1/72000000)	= 0.000000013888 sec
