@@ -1,0 +1,1 @@
+../../lib/fs_yaffs2/Makefile.host
