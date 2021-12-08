@@ -156,7 +156,7 @@ stop_subsystems()
 
 
 void
-os_main(unsigned int crt0_version, unsigned int periph_cfg)
+_sys_main(unsigned int crt0_version, unsigned int periph_cfg)
 {
     setup_devices(periph_cfg);
     enable_all_intr();
@@ -168,7 +168,7 @@ os_main(unsigned int crt0_version, unsigned int periph_cfg)
     stop_subsystems();
 
     /* 
-     * crt0 will call exit upon return from os_main.
+     * crt0 will call exit upon return from _sys_main.
      * exit will re-execute the cpu bootcode, resulting
      * in the application being rexecuted if it was
      * stored on flash.
@@ -177,7 +177,7 @@ os_main(unsigned int crt0_version, unsigned int periph_cfg)
 
 
 thread_t*
-os_handle_interrupt(unsigned int id)
+_sys_handle_interrupt(unsigned int id)
 {
     intr_dispatch_entry_t *e = s_INTR_DISPATCH + id; 
     (*e->handler)(e->act);
