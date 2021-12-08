@@ -1,0 +1,14 @@
+include ${SUMERU_DIR}/conf/mk/sumeru-pre.mk
+
+LIB = libsumeru_unistd_sdfat.a
+
+CFILES = $(wildcard *.c)
+CXXFILES = $(wildcard *.cpp)
+
+SUMERU_FATFS = 1
+
+CFLAGS += -Werror -Wno-stringop-truncation
+CFLAGS += -I../fs_yaffs2
+CFLAGS += -I../fs_sdfat
+
+include ${SUMERU_DIR}/conf/mk/sumeru-lib-post.mk
