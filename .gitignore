@@ -79,3 +79,10 @@ src/lib/unistd/libsumeru_unistd.a
 src/lib/unistd/libsumeru_unistd_sdfat.a
 src/lib/unistd/sumeru_fatfs.o
 src/lib/unistd/unistd.o
+src/app/baremetal/baremetal
+src/app/baremetal/baremetal.bin
+src/app/baremetal/baremetal.o
+src/app/baremetal/entry.o
+src/app/helloworld/helloworld
+src/app/helloworld/helloworld.bin
+src/app/helloworld/helloworld.o
