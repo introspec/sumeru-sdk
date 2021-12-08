@@ -77,21 +77,30 @@ static int s_sdcard_mounted;
 #define UART2_FD		4
 
 
-struct _reent g_REENT;
+struct _reent *g_REENT;
+static struct _reent s_t0_REENT;
 
 struct _reent*
 __getreent (void)
 {
-    return &g_REENT;
+    return g_REENT;
 }
 
 
 void __sinit (struct _reent *);
 
-void __init_reent()
+
+void __init_reent(struct _reent *r)
 {
-    _REENT_INIT_PTR_ZEROED(&g_REENT);
-    __sinit(&g_REENT);
+    _REENT_INIT_PTR_ZEROED(r);
+    __sinit(r);
+}
+
+
+void __init_libc_reent()
+{
+    g_REENT = &s_t0_REENT;
+    __init_reent(g_REENT);
 }
 
 
