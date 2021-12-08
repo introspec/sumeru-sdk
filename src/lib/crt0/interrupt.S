@@ -7,9 +7,11 @@ ivec_##nr: \
 
 
 .section .text.ivector
+.global _sys_restore_caller_registers_and_switch
+.global _sys_save_callee_registers_and_switch
 .global _ivector
-_ivector:
 
+_ivector:
 ivec_boot:
     j _start
     nop 
@@ -84,12 +86,12 @@ asm_handle_interrupt:
 
 #==========================================================================
 
-    call os_handle_interrupt
-    bnez a0, save_callee_registers_and_switch
+    call _sys_handle_interrupt
+    bnez a0, _sys_save_callee_registers_and_switch
 
 #==========================================================================
 
-restore_caller_register_and_switch:
+_sys_restore_caller_registers_and_switch:
 
     # Switch to thread in tp, restore g_REENT
     #
@@ -133,7 +135,7 @@ restore_caller_register_and_switch:
     csrrwi zero, CSR_REG_CTX_SWITCH, 0
     #******* not reached ***********
 
-save_callee_registers_and_switch:
+_sys_save_callee_registers_and_switch:
 
     # Saves callee registers to tp and switch to thread in a0
 
@@ -165,5 +167,5 @@ save_callee_registers_and_switch:
     lw x26, 116(tp)
     lw x27, 120(tp)
 
-    j restore_caller_register_and_switch
+    j _sys_restore_caller_registers_and_switch
     

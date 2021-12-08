@@ -10,21 +10,17 @@
 #include "interrupt.S"
 
 #=========================================================================
-# crt0.S : Entry point for RISC-V user programs
+# crt0.S/_start : Entry point for SUMERU RISC-V binaries
 #
-#		CPU bootcode shall transfer control to  the
-#		interrupt-vector number 0 of this program.
-#		Vector 0 will call _start. Effectively this 
-#		is equivalent to staring execution at the start
-#		of the loaded binary, i.e., at offset 0x0
-#		
-#		*) SP is set to ~32 MB (growing downwards)
+#		CPU bootcode will transfer control to
+#		interrupt-vector 0
 #
-#		*) SP(0) contains the processor version and 
-#		   processor device configuration,
-#		   This "periph_cfg" will be used by os_main 
-#		   to configure interrupts and setup available devices
-#		
+#		As per the convention SP points to 
+#		top of stack with the last valid value
+#
+#		SP(0) contains the processor version and 
+#		processor device configuration.
+#
 #=========================================================================
 
 .text
@@ -33,7 +29,7 @@
 _start:
     csrrci 	zero, CSR_REG_INTR_CTRL, 0x1		# disable intr
     la 		a0, _ivector				
-    csrrw 	zero, CSR_REG_IVECTOR_ADDR, a0		# set ivector base 
+    csrrw 	zero, CSR_REG_IVECTOR_ADDR, a0		# set ivector
 
 .option push
 .option norelax
@@ -54,7 +50,7 @@ _start:
     call    	memset
 
     ### do this early 
-    call   	__init_reent
+    call   	__init_libc_reent
     la 		a0, g_REENT
     lw 		a0, 0(a0)
 
@@ -78,8 +74,8 @@ _start:
     li		a0, CRT0_VERSION
     lw		a1, 0(sp)
 
-    ### call os_main
-    la		a2, os_main 
+    ### call _sys_main
+    la		a2, _sys_main 
     jalr	a2
 
     ### exit will soft reset the CPU and 
