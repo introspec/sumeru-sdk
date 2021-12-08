@@ -1,0 +1,10 @@
+include ${SUMERU_DIR}/conf/sumeru-host-pre.mk
+
+PROG = make-yaffs2-image
+
+CFILES = $(wildcard *.c)
+ASMFILES = $(wildcard *.S)
+
+CFLAGS = -g -DHOST_SIM_MODE
+
+include ${SUMERU_DIR}/conf/sumeru-host-post.mk
