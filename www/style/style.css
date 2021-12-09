@@ -162,48 +162,50 @@
 }
 
 body {
-    max-width: 1200px;
+    width: 90%;
     min-width: 720px;
+    margin-left: 5%;
 }
 
 header {
-	width: 100%;
-        position: relative;
-        top: 0;
-        left: 0;
-        height: 40px;
-        line-height: 40px;
-        background-color: #fff;
-	padding-top: 0px;
-	z-index: 1;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    padding-top: 0px;
+    z-index: 1;
+    margin-left: 5%;
 }
 
 
 header .wrap {
-        max-width: 100%;
+    max-width: 100%;
 }
 
 .logo a {
-        display: block
+    display: block
 }
 
 .logo img {
-        display: block;
-        position: fixed;
-        top: 15px;
-        max-height: 30px;
-        width: auto
+    display: block;
+    position: fixed;
+    top: 15px;
+    max-height: 30px;
+    width: auto
 }
 
 .menu-item {
 }
 
 .main-nav {
-        position: fixed;
-        top: 0px;
-	left: 250px;
-        padding: 0 0px 0 0;
-	z-index: 2;
+    position: fixed;
+    top: 0px;
+    left: 450px;
+    padding: 0 0px 0 0;
+    z-index: 2;
 }
 
 
@@ -213,64 +215,64 @@ header .wrap {
 
 
 .main-nav li {
-        display: inline-block;
-        position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 
 .main-nav li a {
-        color: #222;
-        display: inline-block;
-        padding: 0 10px;
-        line-height: 40px
+    color: #222;
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 40px
 }
 
 
 .main-nav li ul {
-        display: none;
-        position: absolute;
-        top: 80px;
-        right: 0;
-        background-color: #222;
-        padding: 5px;
-        min-width: 120px;
-        text-align: right
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: #222;
+    padding: 5px;
+    min-width: 120px;
+    text-align: right
 }
 
 
 .main-nav li ul li {
-        display: block;
-        line-height: 1.6
+    display: block;
+    line-height: 1.6
 }
 
 a {
-        color: inherit;
+    color: inherit;
 }
 
 a:hover {
-        color: #b9ede8
+    color: #b9ede8
 }
 
 .main-nav li ul li a {
-        padding: 2px 10px;
-        line-height: 1.6;
-        display: block;
-        color: #222
+    padding: 2px 10px;
+    line-height: 1.6;
+    display: block;
+    color: #222
 }
 
 
 .main-nav li ul li:hover a {
-        color: #1f796f
+    color: #1f796f
 }
 
 
 .main-nav li:hover>a {
-        color: #b9ede8
+    color: #b9ede8
 }
 
 
 .main-nav li:hover ul {
-        display: block
+    display: block
 }
 
 .line_break {
@@ -282,37 +284,37 @@ a:hover {
 }
 
 .btn {
-        -webkit-appearance: none;
-        -ms-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        outline: 0;
-        border: 0;
-        font-size: 18px;
-        text-decoration: none !important;
-        cursor: pointer;
-        display: inline-block;
-        padding: 8px 12px;
-        margin-right: 2px;
-        line-height: 1
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    text-decoration: none !important;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 2px;
+    line-height: 1
 }
 
 .btn.blue {
-        background-color: #1f796f;
-        color: #fff
+    background-color: #1f796f;
+    color: #fff
 }
 
 .btn.orange {
-        background-color: #c26d2f;
-        color: #fff
+    background-color: #c26d2f;
+    color: #fff
 }
 
 .btn.blue:hover {
-        background-color: #b9ede8;
+    background-color: #b9ede8;
 }
 
 .btn.orange:hover {
-        background-color: #b9ede8;
+    background-color: #b9ede8;
 }
 
 .spec-table {

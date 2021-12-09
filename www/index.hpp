@@ -24,7 +24,7 @@
 #include "menubar.inc"
 <hr class="line_break"/>
 
-<div class="banner" style="background-image:url(images/prod1-act-front.jpg)">
+<div class="banner" style="background-image:url(images/prod1-act-background.jpg)">
     <div class="banner-container">
 	<table class="banner-table">
 	    <tr>
