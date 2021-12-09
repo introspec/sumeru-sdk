@@ -79,8 +79,8 @@ static int 			g_uart_mode = 1;
 static int 			g_flash_copy_mode = 0;
 static int 			g_ext_write_mode = 0;
 
-static uint16_t 		g_ble_txhnd = 0x11;
-static uint16_t 		g_ble_exthnd = 0x12;
+static uint16_t 		g_ble_txhnd = 0x12;
+static uint16_t 		g_ble_exthnd = 0x16;
 static const char 		*g_ble_mac = "20:C3:8F:EF:5F:06";
 static GAttrib 			*g_ble_attrib;
 static int 			g_ble_mac_flag = 0;
