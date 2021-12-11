@@ -107,7 +107,7 @@ intr_user_callback(unsigned int unit)
         y = (y < 0 ? 0 : y);
 
 
-	if ((s_touch_state & TOUCH_STATE_PRESSED == 0) ||
+	if ((s_touch_state & TOUCH_STATE_PRESSED) == 0 ||
 	     s_touch_x != x || 
 	     s_touch_y != y) 
 	{
