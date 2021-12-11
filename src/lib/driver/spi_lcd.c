@@ -22,21 +22,32 @@ lcd_set_region(
 	unsigned int x1, unsigned int y1, 
 	unsigned int x2, unsigned int y2)
 {
+    static int last_x1 = 0, last_y1 = 0, last_x2 = 0, last_y2 = 0;
     char buf[5];
 
-    buf[0] = 0x2a;              // col set
-    buf[1] = (x1 >> 8) & 0xff;
-    buf[2] = x1 & 0xff;
-    buf[3] = (x2 >> 8) & 0xff;
-    buf[4] = x2 & 0xff;
-    TRANSCEIVE(unit, buf, 5);
+    /* XXX opt if last region equals region avoid set region call*/
+    if (x1 != last_x1 || y1 != last_y1 ||
+	x2 != last_x2 || y2 != last_y2)
+    {
+	last_x1 = x1;
+	last_y1 = y1;
+	last_x2 = x2;
+	last_y2 = y2;
+    
+	buf[0] = 0x2a;              // col set
+	buf[1] = (x1 >> 8) & 0xff;
+	buf[2] = x1 & 0xff;
+    	buf[3] = (x2 >> 8) & 0xff;
+	buf[4] = x2 & 0xff;
+	TRANSCEIVE(unit, buf, 5);
 
-    buf[0] = 0x2b;              // page set
-    buf[1] = (y1 >> 8) & 0xff;
-    buf[2] = y1 & 0xff;
-    buf[3] = (y2 >> 8) & 0xff;
-    buf[4] = y2 & 0xff;
-    TRANSCEIVE(unit, buf, 5);
+	buf[0] = 0x2b;              // page set
+	buf[1] = (y1 >> 8) & 0xff;
+    	buf[2] = y1 & 0xff;
+    	buf[3] = (y2 >> 8) & 0xff;
+    	buf[4] = y2 & 0xff;
+       	TRANSCEIVE(unit, buf, 5);
+    }
 }
 
 
@@ -108,9 +119,6 @@ lcd_blit(unsigned int unit,
 	return;
     }
 
-    /* XXX opt if last region equals region avoid set region call*/
-    /* XXX will stopping refresh help in tearing */
-
     lcd_set_region(unit, x1, y1, x2, y2);
     TRANSCEIVE(unit, "\x2c", 1);
     TRANSCEIVE(unit, buf, len);
@@ -126,9 +134,6 @@ lcd_async_blit(unsigned int unit,
 	errno = EINVAL;
 	return;
     }
-
-    /* XXX opt if last region equals region avoid set region call*/
-    /* XXX will stopping refresh help in tearing */
 
     lcd_set_region(unit, x1, y1, x2, y2);
     TRANSCEIVE(unit, "\x2c", 1);
@@ -146,9 +151,6 @@ lcd_blit_opt(unsigned int unit,
 	return;
     }
 
-    /* XXX opt if last region equals region avoid set region call*/
-    /* XXX will stopping refresh help in tearing */
-
     lcd_set_region(unit, x1, y1, x2, y2);
 
     /* caller should alloc buf appropriately, buf[-1] is overwritten */
@@ -162,24 +164,13 @@ lcd_blit_opt_async(unsigned int unit,
 	    int x1, int y1, int x2, int y2, 
 	    const char *buf, unsigned int len)
 {
-    static int last_x1 = 0, last_y1 = 0, last_x2 = 0, last_y2 = 0;
-
     if ((x1 > x2) || (y1 > y2)) {
 	errno = EINVAL;
 	return;
     }
 
-    /* XXX opt if last region equals region avoid set region call*/
     /* XXX will stopping refresh help in tearing */
-    if (x1 != last_x1 || y1 != last_y1 ||
-	x2 != last_x2 || y2 != last_y2)
-    {
-	lcd_set_region(unit, x1, y1, x2, y2);
-	last_x1 = x1;
-	last_y1 = y1;
-	last_x2 = x2;
-	last_y2 = y2;
-    }
+    lcd_set_region(unit, x1, y1, x2, y2);
 
     /* caller should alloc buf appropriately, buf[-1] is overwritten */
     *((char *)buf - 1) = 0x2c;
