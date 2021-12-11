@@ -206,6 +206,10 @@ microsd_read(unsigned int unit, unsigned int sector, char *data)
 }
 
 
+/*
+ * TODO: Implement true read / write multiple
+ */
+
 int
 microsd_write_multiple(unsigned int unit,
 	unsigned int sector, const char *data, unsigned count)
