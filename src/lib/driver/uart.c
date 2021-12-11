@@ -286,6 +286,8 @@ dev_alloc_uart(unsigned int unit,
 {
     F_PREAMBLE;
 
+    /* Consprod init is not required as sc is setup statically */
+
     e_tx->handler = (device_intr_handler_t) uart_tx_intr_handler;
     e_tx->act = sc;
     e_rx->handler = (device_intr_handler_t) uart_rx_intr_handler;
