@@ -51,13 +51,13 @@ static i2c_softc_t i2c_softc_array[MAX_I2C_DEVICES] =
 	0, 0, 0,
 	i2c0_write_reg_ctrl1, i2c0_write_reg_ctrl2,
 	i2c0_read_reg_ctrls,
-	0, 0, SPI_CLK_SEL_36M, 0
+	0, 0, I2C_CLK_SEL_281p125K, 0
     },
     { 
 	1, 0, 0,
 	i2c1_write_reg_ctrl1, i2c1_write_reg_ctrl2,
 	i2c1_read_reg_ctrls,
-	0, 0, SPI_CLK_SEL_36M, 0
+	0, 0, I2C_CLK_SEL_281p125K, 0
     }
 };
 
@@ -79,7 +79,7 @@ i2c_intr_handler(i2c_softc_t *sc)
     } \
     sc = i2c_softc_array + unit
 
-#define F_PREAMBLE_NR \
+#define F_PREAMBLE_VOID \
     i2c_softc_t *sc; \
     if (unit >= MAX_I2C_DEVICES) { \
 	errno = ENOENT; \
@@ -91,7 +91,7 @@ i2c_intr_handler(i2c_softc_t *sc)
 void
 i2c_set_user_intr_callback(unsigned int unit, i2c_user_intr_callback_t h)
 {
-    F_PREAMBLE_NR;
+    F_PREAMBLE_VOID;
     sc->sc_cb = h;
 }
 
@@ -113,7 +113,7 @@ i2c_async_transceive(
             char *buf, unsigned int len, 
             unsigned char addr)
 {
-    F_PREAMBLE_NR;
+    F_PREAMBLE_VOID;
 
     while (sc->sc_io_pending == 1)
 	;
