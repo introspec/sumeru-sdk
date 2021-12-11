@@ -78,7 +78,7 @@ pwm_start_unit(unsigned int unit, unsigned char duty_cycle_percent)
 
     s_PWM_STATE &= ~(0xff << ((unit + 1) * 8));
     s_PWM_STATE |= 
-	((0x80 | pwm_duty_cycle(duty_cycle_percent)) <<  ((unit + 1) * 8));
+	(pwm_duty_cycle(duty_cycle_percent) <<  ((unit + 1) * 8));
     csr_pwm_write(s_PWM_STATE);
     return 0;
 }
