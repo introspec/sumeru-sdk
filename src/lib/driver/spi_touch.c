@@ -4,8 +4,7 @@
 #include "spi_touch.h"
 #include "timer.h"
 
-#define TOUCH_FLAG_POLL_INPROGRESS	(1 << 28)
-#define TOUCH_FLAG_MASK			(0xf << 28)
+#define TOUCH_FLAG_POLL_INPROGRESS	(1 << 0)
 
 #define RCOUNT				4
 #define DATA_LEN			(2 * RCOUNT + 4)
@@ -74,14 +73,12 @@ intr_user_callback(unsigned int unit)
 	    s_io_data[3] > PRESS_THRESHOLD_HIGH) 
 	{
 	    if (s_touch_state & TOUCH_STATE_PRESSED) {
-		s_touch_state &= ~(TOUCH_STATE_PRESSED);
+		s_touch_state &= ~(TOUCH_STATE_PRESSED | TOUCH_STATE_DRAG);
 		if (s_callback)
 		    (*s_callback)(unit, s_touch_state, s_touch_x, s_touch_y);
 	    }
 	    return;
 	}
-
-	s_touch_state |= TOUCH_STATE_PRESSED;
 
 	y = average_short(s_io_data + 4 + (RCOUNT / 4), 
 				RCOUNT - (RCOUNT / 4));
@@ -109,11 +106,20 @@ intr_user_callback(unsigned int unit)
         y = (y >= Y_END ? Y_END : y);
         y = (y < 0 ? 0 : y);
 
-    	s_touch_x = x;
-    	s_touch_y = y;
 
-	if (s_callback)
-	    (*s_callback)(unit, s_touch_state, s_touch_x, s_touch_y);
+	if ((s_touch_state & TOUCH_STATE_PRESSED == 0) ||
+	     s_touch_x != x || 
+	     s_touch_y != y) 
+	{
+	    if (s_touch_state & TOUCH_STATE_PRESSED)
+		s_touch_state |= TOUCH_STATE_DRAG;
+
+	    s_touch_state |= TOUCH_STATE_PRESSED;
+	    s_touch_x = x;
+	    s_touch_y = y;
+	    if (s_callback)
+		(*s_callback)(unit, s_touch_state, s_touch_x, s_touch_y);
+	}
     }
 }
 
@@ -145,7 +151,7 @@ touch_stop()
 static void
 touch_poll()
 {
-    if ((s_touch_flag & TOUCH_FLAG_MASK) == 0) {
+    if ((s_touch_flag & TOUCH_FLAG_POLL_INPROGRESS) == 0) {
 	memset_short(s_io_data, 0xB1, 4);
 	memset_short(s_io_data + 4, 0x91, RCOUNT);
 	memset_short(s_io_data + 4 + RCOUNT, 0xD1, RCOUNT);
