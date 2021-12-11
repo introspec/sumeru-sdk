@@ -10,7 +10,7 @@
 typedef struct timer_softc 
 {
     unsigned int		sc_unit;
-    unsigned int 		sc_max_ticks;
+    unsigned int 		sc_callback_ticks;
     unsigned int		sc_cur_ticks;
     timer_callback_t 		sc_callback;
 } timer_softc_t;
@@ -48,8 +48,8 @@ timer_intr_handler(timer_softc_t *sc)
     /* optimization -- we have only 2 polls, call directly */
     poll_fn[0]();
     poll_fn[1]();
-    if (timer_softc.sc_max_ticks &&
-	++timer_softc.sc_cur_ticks >= timer_softc.sc_max_ticks)  
+    if (timer_softc.sc_callback_ticks &&
+	++timer_softc.sc_cur_ticks >= timer_softc.sc_callback_ticks)  
     {
 	timer_softc.sc_cur_ticks = 0;
 	sc->sc_callback();
@@ -71,7 +71,7 @@ void
 timer_subsystem_start()
 {
     timer_softc.sc_callback = 0;
-    timer_softc.sc_max_ticks = 0;
+    timer_softc.sc_callback_ticks = 0;
     csr_timer0_ctrl_write(TIMER_INTERVAL_TICKS | 0xf);
 }
 
@@ -80,7 +80,7 @@ void
 timer_subsystem_stop()
 {
     timer_softc.sc_callback = 0;
-    timer_softc.sc_max_ticks = 0;
+    timer_softc.sc_callback_ticks = 0;
     csr_timer0_ctrl_write(0);
 }
 
@@ -95,7 +95,7 @@ timer_enable_callback(unsigned int ticks, timer_callback_t cb)
     }
 
     timer_softc.sc_cur_ticks = 0;
-    timer_softc.sc_max_ticks = ticks;
+    timer_softc.sc_callback_ticks = ticks;
     timer_softc.sc_callback = cb;
 
     return old;
