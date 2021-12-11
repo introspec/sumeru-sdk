@@ -64,6 +64,7 @@ typedef struct _sys_timeval {
 
 void		_sys_gettimeofday_r(_sys_timeval_t *tv);
 void		_sys_waitms(unsigned int ms);
+void		_sys_difftime(uint64_t a, uint64_t b, _sys_timeval_t *tv);
 
 #ifdef __cplusplus
 }
