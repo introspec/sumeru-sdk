@@ -7,6 +7,9 @@ extern "C" {
 
 #define FIONREAD	1000
 
+#define UART1_FD	3
+#define UART2_FD	4
+
 int	sumeru_mount_root_fs();
 
 int	sumeru_mount_fs(

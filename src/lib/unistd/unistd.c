@@ -73,9 +73,6 @@ static int s_sdcard_mounted;
 
 #endif
 
-#define UART1_FD		3
-#define UART2_FD		4
-
 
 struct _reent *g_REENT;
 static struct _reent s_t0_REENT;
