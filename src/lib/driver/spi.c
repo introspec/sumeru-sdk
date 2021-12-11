@@ -92,7 +92,7 @@ spi_intr_handler(spi_softc_t *sc)
     } \
     sc = spi_softc_array + unit
 
-#define F_PREAMBLE_NR \
+#define F_PREAMBLE_VOID \
     spi_softc_t *sc; \
     if (unit >= MAX_SPI_DEVICES) { \
 	errno = ENOENT; \
@@ -104,7 +104,7 @@ spi_intr_handler(spi_softc_t *sc)
 void
 spi_set_user_intr_callback(unsigned int unit, spi_user_intr_callback_t h)
 {
-    F_PREAMBLE_NR;
+    F_PREAMBLE_VOID;
     sc->sc_cb = h;
 }
 
@@ -134,7 +134,7 @@ spi_async_transceive(
             char *buf, unsigned int len, 
             unsigned char aux)
 {
-    F_PREAMBLE_NR;
+    F_PREAMBLE_VOID;
 
     while (sc->sc_io_pending == 1)
 	;
@@ -176,13 +176,11 @@ spi_transceive(
             char *buf, unsigned int len,
             unsigned char aux)
 {
-    int r;
-
     spi_async_transceive(unit, buf, len, aux);
 
-    while ( (r = spi_async_transceive_done(unit)) == -1)
+    while (spi_async_transceive_done(unit) == -1)
 	;
 
-    return r;
+    return 0;
 }
 
