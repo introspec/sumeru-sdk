@@ -128,6 +128,8 @@ setup_devices(unsigned int periph)
 		break;
 	    default:
 		/* unrecognized interrupts goto default handler */
+		/* note: increment to vnr++ */
+		vnr++;
 		break;
 	}
     }
